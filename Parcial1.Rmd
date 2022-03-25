@@ -1,0 +1,146 @@
+---
+title: "Parcial1"
+author: "SANTIAGO LOPEZ Y DIEGO MARIN"
+date: "3/25/2022"
+output: html_document
+---
+
+## Parcial 1
+
+### Punto 1
+
+La tabla mostrada contiene valores de poblacion, en cientos de miles, de las diez ciudades mas pobladas de cuatro paises en el anio 1967:
+
+Argentina | EE.UU. | Holanda | Japon
+--|--|--|--
+29.66 | 77.81 | 8.68 | 110.21
+7.61 | 35.50 | 7.31 | 32.14
+6.35 | 24.79 | 6.02 | 18.88
+4.10 | 20.02 | 2.64 | 16.38
+3.80 | 16.70 | 1.75 | 13.37
+2.75 | 9.39 | 1.72 | 11.92
+2.70 | 9.38 | 1.51 | 10.71
+2.69 | 8.76 | 1.42 | 7.80
+2.51 | 7.63 | 1.31 | 7.70
+2.44 | 7.50 | 1.29 | 7.00
+
+#### A.Construya un box-plot e identifique los puntos extremos. Cuales son las caracteristicas mas sobresalientes? Hay outliers?
+```{r}
+## creqcion de los vectores con los datos recolectados por pais
+argentina = c(29.66, 7.61, 6.35, 4.10, 3.80, 2.75, 2.70, 2.69, 2.51, 2.44)
+eeuu = c(77.81, 35.50, 24.79, 20.02, 16.70, 9.39, 9.38, 8.76, 7.63, 7.50)
+holanda = c(8.68, 7.31, 6.02, 2.64, 1.75, 1.72, 1.51, 1.42, 1.31, 1.29)
+japon = c(110.21, 32.14, 18.88, 16.38, 13.37, 11.92, 10.71, 7.80, 7.70, 7.00)
+
+```
+
+
+
+```{r puntoA, echo=FALSE}
+## creacion de los cuatro espacios para los graficos
+par(mfrow= c(2,2))
+
+##Creacion de los 4 boxplot, uno por cada pais
+boxplot(argentina, col = "cyan" , main = "Argentina", xlab="Poblacion en cientos de miles",  horizontal = TRUE)
+stripchart(argentina, method = "jitter", pch = 19, add = TRUE, col = "yellow")
+boxplot(eeuu, col = "blue" , main = "Estados Unidos", xlab="Poblacion en cientos de miles",  horizontal = TRUE)
+stripchart(eeuu, method = "jitter", pch = 19, add = TRUE, col = "red")
+boxplot(holanda, col = "orange" , main = "Holanda", xlab="Poblacion en cientos de miles",  horizontal = TRUE)
+stripchart(holanda, method = "jitter", pch = 19, add = TRUE, col = "black")
+boxplot(japon, col = "white" , main = "Japon", xlab="Poblacion en cientos de miles",  horizontal = TRUE)
+stripchart(japon, method = "jitter", pch = 19, add = TRUE, col = "red")
+```
+
+En la comparación de los cuatro gráficos de boxplot respecto a cada país se puede evidenciar que Argentina, Estados Unidos y Japón presentan unos datos atipicos y la concentración de los datos no esta tan agrupada. Mientras que en Holanda los datos están más agrupados y no presentan ningún dato atipico. En cuanto a los datos recolectados la mayor variación se presenta en el país Argentina ya que tienen un rango muy amplio entre los limites. 
+
+#### B. Compare los centros de cada poblacion, sus dispersiones y su simetria. Cual es el pais mas homogeneamente habitado? Cuales son las caracteristicas mas sobresalientes? Hay outliers?
+
+```{r}
+## medias de los 4 paises
+mediaArgentina = mean(argentina)
+mediaEEUU = mean(eeuu)
+mediaHolanda = mean(holanda)
+mediaJapon = mean(japon)
+## mediana de los 4 pais 
+medianaArgentina= median(argentina)
+medianaEEUU= median(eeuu)
+medianaHolanda= median(holanda)
+medianaJapon= median(japon)
+## Varuianza de los 4 pais
+varArgentina = var(argentina)
+varEEUU = var(eeuu)
+varHolanda = var(holanda)
+varJapon = var(japon)
+## Desviacion Estandar de los 4 paises
+desArgentina= sd(argentina)
+desEEUU= sd(eeuu)
+desHolanda= sd(holanda)
+desJapon= sd(japon)
+## coeficiente de relacion de los 4 paises
+cvArgentina= (desArgentina/mediaArgentina)*100
+cvEEUU= (desEEUU/mediaEEUU)*100
+cvHolanda= (desHolanda/mediaHolanda)*100
+cvJapon= (desJapon/mediaJapon)*100
+
+```
+
+ Datos Estadisticos | Argentina | EE.UU. | Holanda | Japon
+--|--|--|--|--
+Media | 6.461 | 21.748 | 3.365 | 23.611
+Mediana | 3.275 | 13.045 | 1.735 | 12.645
+Moda | amodal | amodal | amodal | amodal 
+Varianza | 69.566 | 471.831 | 8.05 | 981.540
+Desviacion Estandar | 8.340 | 21.721 | 2.837 | 31.329
+Coeficiente de variacion| 129.092 | 99.879 | 84.318 | 132.690
+Simetria | Positiva | Positiva | Positiva | Positiva
+
+##### En base a la tabla anterior se puede observar que:
+##### - Argentina tiene un pormedio de 646,1 mil habitantes con una desviacion estadar de mas o menos 834 mil habitantes y una simetria positiva con respecto a sus medidas de tendencia central, Argentina presenta un dato atipico de 296,6 mil habitantes.
+ 
+##### - Estados Unidos tiene un pormedio de 2.174,8 mil habitantes con una desviacion estadar de mas o menos 2.172,1 mil habitantes y una simetria positiva con respecto a sus medidas de tendencia central, Estados Unidos presenta un dato atipico de 7.781 mil habitantes. 
+
+##### - Holanda tiene un pormedio de 336,5 mil habitantes con una desviacion estadar de mas o menos 283,7 mil habitantes y una simetria positiva con respecto a sus medidas de tendencia central, Holanda no presenta ningun dato atipico.
+
+##### - Japon tiene un pormedio de 2.361,1 mil habitantes con una desviacion estadar de mas o menos 3.132,9 mil habitantes y una simetria positiva con respecto a sus medidas de tendencia central, Japon presenta un dato atipico de 11.021 mil habitantes.
+
+#### Con respecto al coeficiente de variacion se puede concluir que el Pais mas homogeneamente habitado es Holanda, pues tiene el coeficiente de variacion mas bajo, lo que quiere decir, que los datos tienen poca variacion
+
+### Punto 2 
+Avianca se encuentra estudiando la situacion de venta de puesto en el vuelo Armenia – Bogota puesto que ha identificado que el 2% de las personas que reservaron puesto, no se presentan a la hora del embarque. Teniendo en cuenta que el avion A320 utilizado en esta ruta tiene una capacidad para 180 pasajeros, la empresa decide vender 181 tiquetes. Cual es la probabilidad de que todas las personas que llegan a embarque puedan tener su silla asegurada y no se presenten quejas por “sobre-vender” sillas ante la aeronautica civil? Asuma que las llegadas de los pasajeros siguen una distribucion Poisson
+
+```{r}
+## se sabe que el 98% de las personas que reservan el vuelo de Armenia - Bogota se presentan a la hora de emabarque, entonces
+lambda2= 180 * 0.98
+## probabilidad de que x<= 180, siendo X la cantidad de personas embarcando al avion
+ppois(180, lambda = lambda2, lower.tail = TRUE)
+```
+```{r punto2, echo=FALSE}
+## creacion del grafico de la distribucionde Poisson
+plot(dpois(0:220, lambda = lambda2),col="blue", type = "l", ylab = "Probabilidad", xlab = "Cantidad de personas que embarcan el vuelo Armenia-Bogota ", main = "Distribucion Poisson("~lambda ~"=176,4)")
+## se dibuja una linea en 180 separando el limite de sillas en el avion
+abline(v=180)
+
+```
+
+#### La probabilidad de que todas las personas que llegan a embarcar tengan su silla asegurada y no presenten quejas por "sobre-vender" sillas ante la aeronautica civil es de 0.6255
+
+### Punto 3
+En la planta envasadora de Coca-Cola FEMSA ubicada en Tocancipa se realiza el embotellado de la Coca-Cola presentacion de 400 mL (en promedio), con una desviacion estandar de 5 mL (mililitros). Si se sabe por experiencia que este proceso de embotellado sigue una distribucion normal, y tambien se sabe que todo producto con mas de 415 mL es declarado como NO CONFORME. Determine el porcentaje de las botellas de gaseosa que son declaradas producto NO CONFORME.
+
+```{r}
+## X es la cantidad de mL en las botellas envasadas en la planta de Coca-Cola FEMSA en Tocancipa
+##teniendo como media
+mu= 400
+## y desviacion estandar
+sigma= 5
+
+pnorm(415, mu , sigma , lower.tail = FALSE)
+
+```
+```{r punto3, echo=FALSE}
+
+plot(350:450, dnorm(350:450,mu,sigma), col="red", type = "l", ylab = "probabilidad", xlab = "Cantidad de mL en las botellas envasadas en la planta de Coca-Cola FEMSA en Tocancipa", main = "Distribucion normal ("~mu ~" =400,"~sigma~ "=5)")
+abline(v=415,lty=2)
+```
+
+#### El porcentaje de las botellas de gaseosa Coca-Cola en presentacion de 400 mL envasadas en Tocancipa que son declaradas como NO CONFORMES es de 0,1349%
